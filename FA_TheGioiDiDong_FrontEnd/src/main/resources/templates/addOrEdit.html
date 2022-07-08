@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Admin Page</title>
@@ -15,8 +15,7 @@
     <!-- logo link -->
     <link rel="icon" href="https://cdn.haitrieu.com/wp-content/uploads/2021/11/Logo-The-Gioi-Di-Dong-MWG.png"
         type="image/x-icon">
-
-    <link rel="stylesheet" href="/css/admin.css">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/admin.css}">
 </head>
 
 <body>
@@ -26,35 +25,39 @@
         </header>
         <section class="row">
             <div class="col-6 offset-3 mt-4">
-                <form action="" method="post">
+                <form action="#"
+                    th:action="${add} ? @{/admin/categories/addCategory} : @{/admin/categories/{id}/edit(id=${category.categoryId})}"
+                    th:object="${categoriesForm}" method="post">
                     <div class="card">
                         <div class="card-header">
-                            <h2>Add New Category</h2>
+                            <h2 th:text="${add} ? 'Add a Category:' : 'Edit a Category:'" />
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="categoryId">Category ID:</label>
-                                <input type="text" class="form-control" name="categoryId" id="categoryId"
-                                    aria-describedby="categoryIdHid" placeholder="Category ID">
-                                <small id="categoryIdHid" class="form-text text-muted">Category id is required</small>
+                                <div class="form-group">
+                                    <label for="name">Category Id</label>
+                                    <input type="text" class="form-control" th:field="*{categoryId}" id="categoryId"
+                                        aria-describedby="categoryIdHid" placeholder="Category Id" readonly>
+                                    <small id="categoryIdHid" class="form-text text-muted">Category is required</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" th:field="*{categoryName}" id="name"
+                                        aria-describedby="nameHid" placeholder="Category Name">
+                                    <small id="nameHid" class="form-text text-muted">Name is required</small>
+                                </div>
+
                             </div>
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHid"
-                                    placeholder="Category Name">
-                                <small id="nameHid" class="form-text text-muted">Name is required</small>
+                            <div class="card-footer text-muted">
+
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                                <a th:href="@{/admin/categories}" class="btn btn-success">List Category</a>
+                                <button type="submit" class="btn btn-primary"> <i class="fas fa-save    "></i>
+                                    Save</button>
+
+
                             </div>
-
                         </div>
-                        <div class="card-footer text-muted">
-
-                            <button type="reset" class="btn btn-secondary">Reset</button>
-                            <button class="btn btn-success">List Category</button>
-                            <button class="btn btn-primary"> <i class="fas fa-save    "></i> Save</button>
-
-
-                        </div>
-                    </div>
                 </form>
             </div>
         </section>
