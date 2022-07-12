@@ -113,12 +113,16 @@ public class AdminController {
 	public String deleteCategoryId(Model model, @PathVariable("id") Long id) {
 
 		RestTemplate restTemplate = new RestTemplate();
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		CategoryDTO category = new CategoryDTO();
-		category.setCategoryId(id);
-		HttpEntity entity = new HttpEntity(category, headers);
-		restTemplate.exchange("http://localhost:8001/categories", HttpMethod.POST, entity, String.class).getBody();
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setContentType(MediaType.APPLICATION_JSON);
+//		CategoryDTO category = new CategoryDTO();
+//		category.setCategoryId(id);
+//		HttpEntity entity = new HttpEntity(category, headers);
+//		restTemplate.exchange("http://localhost:8001/categories", HttpMethod.POST, entity, String.class).getBody();
+
+		String url = "http://localhost:8001/categories/" + id + "";
+
+		restTemplate.delete(url);
 		return "redirect:/admin/categories";
 	}
 }
