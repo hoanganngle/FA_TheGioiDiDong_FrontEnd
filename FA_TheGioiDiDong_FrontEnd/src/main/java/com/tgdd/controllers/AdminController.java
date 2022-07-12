@@ -1,7 +1,6 @@
 package com.tgdd.controllers;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,27 +11,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import com.tgdd.entities.CategoryDTO;
-
-import javassist.expr.NewArray;
 
 @Controller
 @RequestMapping("admin/categories")
 public class AdminController {
 
-	@GetMapping("")
+	@RequestMapping
 	public String list(ModelMap model) {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<CategoryDTO[]> entity = new HttpEntity<CategoryDTO[]>(headers);
@@ -45,7 +40,7 @@ public class AdminController {
 		if (statusCode == HttpStatus.OK) {
 			CategoryDTO[] category = response.getBody();
 			model.addAttribute("listCategories", category);
-			model.addAttribute("id", category);
+
 			if (category != null) {
 				for (CategoryDTO e : category) {
 					System.out.println("Category: " + e.getCategoryId() + " - " + e.getCategoryName());
@@ -59,7 +54,7 @@ public class AdminController {
 	}
 
 	@GetMapping("addCategory")
-	public String addCategory(ModelMap model) {
+	public String ShowAddCategory(ModelMap model) {
 		model.addAttribute("add", true);
 		model.addAttribute("categoriesForm", new CategoryDTO());
 		return "addOrEdit";
@@ -88,42 +83,42 @@ public class AdminController {
 		return "redirect:/admin/categories";
 	}
 
-//	@GetMapping("/findCategory")
-//	public CategoryDTO
+	@GetMapping("edit")
+	public String EditCategory(ModelMap model) {
 
-//edit
-	@RequestMapping(value = "/{categoryId}/edit", method = RequestMethod.GET)
-	public String getCategory(@PathVariable("id") long id, CategoryDTO category, Model model) {
-		RestTemplate restTemplate = new RestTemplate();
-		String URL_UPDATE_CATEGORYsss = "http://localhost:8001/categories/{categoryId}";
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<CategoryDTO> requestEntity = new HttpEntity<>(headers);
-
-		ResponseEntity<CategoryDTO> responseEntity = restTemplate.exchange(URL_UPDATE_CATEGORYsss + id, HttpMethod.GET,
-				requestEntity, CategoryDTO.class);
-//	        ResponseEntity<UserDTO> responseEntity = restTemplate.getForEntity(baseURL + id, UserDTO.class);
-		System.out.println("Status Code: " + responseEntity.getStatusCode());
-		System.out.println("Response Header: " + responseEntity.getHeaders());
-
-		return "addOrEddit" + category.getCategoryId();
+		model.addAttribute("categoriesFormEdit", new CategoryDTO());
+		return "edit";
 	}
 
-	@RequestMapping(value = "/{categoryId}/edit", method = RequestMethod.POST)
-	public String saveEditCategory(Model model, @PathVariable("id") long categoryId,
-			@ModelAttribute("categoriesForm") @RequestBody CategoryDTO categoryName) {
-		String URL_UPDATE_CATEGORY = "http://localhost:8001/categories/{categoryId}";
-
+	@RequestMapping(path = { "/edit", "/edit/{id}" })
+	public String editEmployeeById(Model model, @PathVariable("id") Optional<Long> id) {
+		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		CategoryDTO category = new CategoryDTO();
+		if (id.isPresent()) {
+			category.setCategoryId(id.get());
+			HttpEntity<CategoryDTO> entity = new HttpEntity<CategoryDTO>(category, headers);
+
+			category = restTemplate
+					.exchange("http://localhost:8001/categories", HttpMethod.POST, entity, CategoryDTO.class).getBody();
+
+		}
+		model.addAttribute("categoriesFormEdit", category);
+
+		return "edit";
+	}
+
+	@RequestMapping(path = "/delete/{id}")
+	public String deleteCategoryId(Model model, @PathVariable("id") Long id) {
 
 		RestTemplate restTemplate = new RestTemplate();
-
-		// Dữ liệu đính kèm theo yêu cầu.
-		HttpEntity<CategoryDTO> requestBody = new HttpEntity<>(categoryName, headers);
-
-		restTemplate.exchange(URL_UPDATE_CATEGORY, HttpMethod.PUT, requestBody, Void.class);
-		model.addAttribute("add", false);
-		return "redirect:/admin/categories/" + String.valueOf(categoryName.getCategoryId());
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		CategoryDTO category = new CategoryDTO();
+		category.setCategoryId(id);
+		HttpEntity entity = new HttpEntity(category, headers);
+		restTemplate.exchange("http://localhost:8001/categories", HttpMethod.POST, entity, String.class).getBody();
+		return "redirect:/admin/categories";
 	}
 }

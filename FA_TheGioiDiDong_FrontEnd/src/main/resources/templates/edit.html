@@ -25,15 +25,20 @@
         </header>
         <section class="row">
             <div class="col-6 offset-3 mt-4">
-                <form action="#" th:action=" @{/admin/categories/addCategory}" th:object="${categoriesForm}"
+                <form action="#" th:action="@{/admin/categories/addCategory}" th:object="${categoriesFormEdit}"
                     method="post">
                     <div class="card">
                         <div class="card-header">
-                            <h2 th:text="${add} ? 'Add a Category:' : 'Edit a Category:'" />
+                            <h2>Edit</h2>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-
+                                <div class="form-group">
+                                    <label for="name">Category Id</label>
+                                    <input type="text" class="form-control" th:field="*{categoryId}" id="categoryId"
+                                        aria-describedby="categoryIdHid" placeholder="Category Id" readonly>
+                                    <small id="categoryIdHid" class="form-text text-muted">Category is required</small>
+                                </div>
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input type="text" class="form-control" th:field="*{categoryName}" id="name"

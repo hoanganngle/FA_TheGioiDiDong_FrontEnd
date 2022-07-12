@@ -2,8 +2,6 @@ package com.tgdd.entities;
 
 import java.io.Serializable;
 
-import org.springframework.beans.propertyeditors.InputSourceEditor;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -19,4 +17,8 @@ public class CategoryDTO implements Serializable {
 	private long categoryId;
 	private String categoryName;
 
+	@Override
+	public String toString() {
+		return "CategoryEntity [id=" + categoryId + ", categoryName=" + categoryName + "]";
+	}
 }
