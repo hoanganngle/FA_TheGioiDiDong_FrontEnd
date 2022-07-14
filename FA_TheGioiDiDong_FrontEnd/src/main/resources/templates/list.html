@@ -42,7 +42,7 @@
                             </thead>
                             <tbody>
                                 <tr th:each="category : ${listCategories}">
-                                    <td scope="row">[[${category?.categoryId}]]</td>
+                                    <td scope="row">[[${category.categoryId}]]</td>
                                     <td th:text="${category.categoryName}"></td>
                                     <td>
                                         <a href="" class="btn btn-outline-info"><i class="fas fa-info"></i></a>
