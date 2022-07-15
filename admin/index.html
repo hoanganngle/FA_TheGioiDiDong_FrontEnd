@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" />
+    <link rel="stylesheet" href="/styles/style.css" />
+    <title> Web Admin</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__logo dflex px-2 justify-content-start align-items-center">
+            <i class="header__collapse--btn fas fa-align-left"></i>
+            <img class="header__logo__img" src="./assets/logo1.png" alt="greatweb" />
+        </div>
+        <div class="header__search px-1 mr-1 dflex justify-content-start align-items-center">
+            <i class="header__search--icon fas fa-search"></i>
+            <input class="header__search__input" type="text" placeholder="Search" />
+        </div>
+        <div class="header__profile px-1 mx-3 dflex justify-content-start align-items-center">
+            <div class="header__profile__imgWrapper mr-1">
+                <img class="header__profile__img" src="./assets/avatar.jpg" alt="" />
+            </div>
+            <p class="header__profile__name text-white text-bold-500 relative">
+                Admin
+            </p>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Header Profile -->
+    <div>
+        <span class="header__profile__name--nav">
+            <span class="header__profile__name--nav--pointer">
+                <i class="fas fa-sort-up"></i>
+            </span>
+            <ul class="header__profile__name--nav--list">
+                <li class="header__profile__name--nav--item">
+                    <a class="header__profile__name--nav--link" href="#">Profile</a>
+                </li>
+                <li class="header__profile__name--nav--item">
+                    <a class="header__profile__name--nav--link" href="#">Message</a>
+                </li>
+                <li class="header__profile__name--nav--item">
+                    <a class="header__profile__name--nav--link" href="#">Logout</a>
+                </li>
+            </ul>
+        </span>
+    </div>
+    <!-- End Profile Header -->
+
+    <!-- Nav Main -->
+    <nav class="nav">
+        <div class="nav__wrapper">
+            <span class="nav__close">
+                <i class="fas fa-window-close"></i>
+            </span>
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a class="nav__link nav__active" href="#">
+                        <span class="nav__link--span--icon"><i class="fas fa-home nav__link--icon"> </i></span>
+                        <span class="nav__link--span--navname">
+                            Home
+                        </span>
+                    </a>
+                </li>
+                <li class="nav__item nav__showOrders">
+                    <a class="nav__link" href="#">
+                        <span class="nav__link--span--icon"><i class="fas fa-shopping-bag nav__link--icon">
+                            </i></span>
+                        <span class="nav__link--span--navname">
+                            Orders
+                        </span>
+                    </a>
+                </li>
+
+                <ul class="sub__nav--list nav__orders--items">
+                    <li class="sub__nav--item">
+                        <a class="sub__nav--link" href="#"> Orders</a>
+                    </li>
+                    <li class="sub__nav--item">
+                        <a class="sub__nav--link" href="#">Abandoned Checkouts</a>
+                    </li>
+                </ul>
+                <li class="nav__item nav__showProducts">
+                    <a class="nav__link" href="#">
+                        <span class="nav__link--span--icon"><i class="fas fa-tags nav__link--icon"> </i></span>
+                        <span class="nav__link--span--navname">
+                            Products
+                        </span>
+                    </a>
+                </li>
+                <ul class="sub__nav--list nav__products--items">
+                    <li class="sub__nav--item">
+                        <a class="sub__nav--link" href="#">All products</a>
+                    </li>
+
+                    <li class="sub__nav--item">
+                        <a class="sub__nav--link" href="#">Collection</a>
+                    </li>
+                </ul>
+                <li class="nav__item">
+                    <a class="nav__link" href="#">
+                        <span class="nav__link--span--icon"><i class="fas fa-user nav__link--icon"> </i></span>
+                        <span class="nav__link--span--navname">
+                            Customers
+                        </span>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#">
+                        <span class="nav__link--span--icon"><i class="fas fa-file-invoice-dollar nav__link--icon">
+                            </i></span>
+                        <span class="nav__link--span--navname">
+                            Discounts
+                        </span>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#">
+                        <span class="nav__link--span--icon"><i class="fas fa-cog nav__link--icon"> </i></span>
+                        <span class="nav__link--span--navname">
+                            Settings
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- End Nav Main -->
+
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
