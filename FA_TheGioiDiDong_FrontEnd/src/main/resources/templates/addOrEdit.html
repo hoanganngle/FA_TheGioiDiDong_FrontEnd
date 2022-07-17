@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{dashboardLayout.html}">
+
+<head>
+
+</head>
+
+<body>
+
+    <section class="row" layout:fragment="content">
+        <div class="col-sm-8">
+            <form action="#" th:action=" @{/admin/categories/addCategory}" th:object="${categoriesForm}" method="post">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Add</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" th:field="*{categoryName}" id="name"
+                                    aria-describedby="nameHid" placeholder="Category Name">
+                                <small id="nameHid" class="form-text text-muted">Name is required</small>
+                            </div>
+
+                        </div>
+                        <div class="card-footer text-muted">
+
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <a th:href="@{/admin/categories}" class="btn btn-success">List Category</a>
+                            <button type="submit" class="btn btn-primary"> <i class="fas fa-save    "></i>
+                                Save</button>
+
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+
+
+</body>
+
+</html>

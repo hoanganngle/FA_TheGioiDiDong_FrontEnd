@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+</head>
+
+<body>
+    <div th:fragment="header">
+        <header class="header">
+            <div class=" header__logo dflex px-2 justify-content-start align-items-center">
+                <i class="header__collapse--btn fas fa-align-left"></i>
+                <img class="header__logo__img" th:src="@{/images/logo1.png}" alt="greatweb" />
+            </div>
+            <div class="header__search px-1 mr-1 dflex justify-content-start align-items-center">
+                <i class="header__search--icon fas fa-search"></i>
+                <input class="header__search__input" type="text" placeholder="Search" />
+            </div>
+            <div class="header__profile px-1 mx-3 dflex justify-content-start align-items-center">
+                <div class="header__profile__imgWrapper mr-1">
+                    <img class="header__profile__img" th:src="@{/images/avatar.jpg}" alt="" />
+                </div>
+                <p class="header__profile__name text-white text-bold-500 relative">
+                    Admin
+                </p>
+            </div>
+        </header>
+        <!-- End Header -->
+
+        <!-- Header Profile -->
+        <div>
+            <span class="header__profile__name--nav">
+                <span class="header__profile__name--nav--pointer">
+                    <i class="fas fa-sort-up"></i>
+                </span>
+                <ul class="header__profile__name--nav--list">
+                    <li class="header__profile__name--nav--item">
+                        <a class="header__profile__name--nav--link" href="#">Profile</a>
+                    </li>
+                    <li class="header__profile__name--nav--item">
+                        <a class="header__profile__name--nav--link" href="#">Message</a>
+                    </li>
+                    <li class="header__profile__name--nav--item">
+                        <a class="header__profile__name--nav--link" href="#">Logout</a>
+                    </li>
+                </ul>
+            </span>
+        </div>
+
+
+
+    </div>
+</body>
+
+</html>
